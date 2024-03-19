@@ -1,0 +1,17 @@
+{
+    "name": "rachideljay/prof_jatsu_youtube_site",
+    "autoload": {
+        "psr-4": {
+            "Routes\\": "Routes/",
+            "App\\": "App/",
+            "Database\\": "Database/"
+        }
+    },
+    "authors": [
+        {
+            "name": "daouda",
+            "email": "daoudasoum14@gmail.com"
+        }
+    ],
+    "require": {}
+}
