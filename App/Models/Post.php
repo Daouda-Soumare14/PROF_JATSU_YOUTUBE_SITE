@@ -40,8 +40,7 @@ HTML;
         return $this->query("
                 SELECT t.* FROM tags t
                 INNER JOIN post_tag pt ON pt.tag_id = t.id
-                INNER JOIN posts p ON pt.post_id = p.id
-                WHERE p.id = ?
+                WHERE pt.post_id = ?
                 ", $this->id);
     }
 }

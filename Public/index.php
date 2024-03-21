@@ -21,6 +21,7 @@ $router = new Router($_GET['url']);
 $router->get('/', 'App\Controllers\BlogController@welcome'); // Route pour afficher la page d'accueil
 $router->get('/posts/', 'App\Controllers\BlogController@index'); // Route pour afficher la page d'accueil
 $router->get('/posts/:id', 'App\Controllers\BlogController@show'); // Route pour afficher un article de blog spécifique
+$router->get('/tags/:id', 'App\Controllers\BlogController@tag'); // Route pour afficher un article de blog spécifique
 
 // Exécute le routeur pour traiter la demande HTTP actuelle
 $router->run();

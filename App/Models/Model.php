@@ -30,7 +30,7 @@ abstract class Model
     public function query(string $sql, int $param = null, bool $single = null)
     {
         // Méthode pour exécuter une requête SQL.
-        $method = is_null($param) ? 'query' : 'prepare'; // Choix de la méthode PDO en fonction des paramètres.
+        $method   = is_null($param)  ? 'query'    : 'prepare'; // Choix de la méthode PDO en fonction des paramètres.
         $recovery = is_null($single) ? 'fetchAll' : 'fetch'; // Choix de la méthode de récupération des résultats.
 
         $stmt = $this->db->getPdo()->$method($sql); // Préparation de la requête.

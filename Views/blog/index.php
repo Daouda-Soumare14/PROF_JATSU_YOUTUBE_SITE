@@ -5,13 +5,16 @@
         <div class="card-body">
             <h2><?= $post->title ?></h2>
             <div>
-                <?php foreach($post->getTags() as $tag) : ?>
-                    <span class="badge badge-info"><?= $tag->name ?></span>
+                <?php foreach ($post->getTags() as $tag) : ?>
+                    <span class="badge badge-success"><a href="
+                    /Prof_Jatsu_Youtube_Site/public/tags/<?= $tag->id ?>"
+                    class="text-white"><?= $tag->name ?></a>
+                    </span>
                 <?php endforeach ?>
             </div>
             <small class="text-info">Publié le <?= $post->getCreatedAt() ?></small>
             <p><?= $post->getExcerpt() ?></p>
-            <?= $post->getButton()?>
+            <?= $post->getButton() ?>
         </div>
     </div>
 <?php endforeach ?>
