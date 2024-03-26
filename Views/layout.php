@@ -23,6 +23,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/Prof_Jatsu_Youtube_Site/public/posts">Les derniers articles</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Prof_Jatsu_Youtube_Site/public/admin/posts">Administration Article</a>
+                </li>
             </ul>
         </div>
     </nav>
