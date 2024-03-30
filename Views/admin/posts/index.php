@@ -1,4 +1,7 @@
 <h1>Administration des Articles</h1>
+
+<a href="/prof_jatsu_youtube_site/public/admin/posts/create" class="btn btn-success my-3">Creer un nouvel article</a>
+
 <table class="table">
     <thead>
         <tr>

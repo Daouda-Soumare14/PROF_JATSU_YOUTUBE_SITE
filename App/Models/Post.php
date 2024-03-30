@@ -38,6 +38,22 @@ HTML;
                 WHERE pt.post_id = ?", [$this->id]);
     }
 
+    public function create(array $data, ?array $relations = null)
+    {
+        parent::create($data);
+
+        $id = $this->db->getPdo()->lastInsertId();
+         foreach($relations as $tagId)
+         {
+             // Prépare une requête SQL pour insérer une nouvelle relation post_tag.
+             $stmt = $this->db->getPdo()->prepare("INSERT post_tag(post_id, tag_id) VALUES(?,?)");
+             // Exécute l'opération d'insertion avec l'identifiant de post et l'identifiant de tag donnés.
+             $stmt->execute([$id, $tagId]);
+         }
+
+         return true;
+    }
+
     public function update(int $id, array $data, ?array $relations=null)
     {
         // Appelle la méthode update de la classe parente avec les données fournies.
@@ -52,7 +68,7 @@ HTML;
         foreach($relations as $tagId)
         {
             // Prépare une requête SQL pour insérer une nouvelle relation post_tag.
-            $stmt = $this->db->getPdo()->prepare("INSERT INTO post_tag(post_id, tag_id) VALUES(?,?)");
+            $stmt = $this->db->getPdo()->prepare("INSERT post_tag(post_id, tag_id) VALUES(?,?)");
             // Exécute l'opération d'insertion avec l'identifiant de post et l'identifiant de tag donnés.
             $stmt->execute([$id, $tagId]);
         }

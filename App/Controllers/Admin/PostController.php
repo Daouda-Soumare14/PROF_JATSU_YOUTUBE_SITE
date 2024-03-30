@@ -15,12 +15,33 @@ class PostController extends Controller
         return $this->view('admin.posts.index', compact('posts'));
     }
 
+    public function create()
+    {
+        $tags = (new Tag($this->getDB()))->all();
+
+        $this->view('admin.posts.form', compact('tags'));
+    }
+
+    public function createPost()
+    {
+        $post = new Post($this->getDB());
+
+        $tags = array_pop($_POST);
+
+        $result = $post->create($_POST, $tags);
+
+        if ($result) {
+            return header("Location: /Prof_Jatsu_Youtube_Site/public/admin/posts");
+            exit;
+        }
+    }
+
     public function edit(int $id)
     {
         $post = (new Post($this->getDB()))->findById($id);
         $tags = (new Tag($this->getDB()))->all();
 
-        return $this->view('admin.posts.edit', compact('post', 'tags'));
+        return $this->view('admin.posts.form', compact('post', 'tags'));
     }
 
     public function update(int $id)
@@ -32,7 +53,7 @@ class PostController extends Controller
         $result = $post->update($id, $_POST, $tags);
 
         if ($result) {
-            return header("Location: http://localhost:8888/Prof_Jatsu_Youtube_Site/public/admin/posts");
+            return header("Location: /Prof_Jatsu_Youtube_Site/public/admin/posts");
             exit;
         }
     }

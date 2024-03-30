@@ -33,6 +33,22 @@ abstract class Model
         return $this->query("SELECT * FROM {$this->table} WHERE id = ?", [$id], true);
     }
 
+    public function create(array $data, ?array $relations=null)
+    {
+        $firstParenthesis = "";
+        $secondParenthesis = "";
+        $i = 1;
+        foreach ($data as $key => $value) 
+        {
+            $comma = $i === count($data) ? "" : ", ";
+            $firstParenthesis .= "{$key}{$comma}";
+            $secondParenthesis .= ":{$key}{$comma}";
+            $i++;
+        }
+
+        return $this->query("INSERT INTO {$this->table} ($firstParenthesis) 
+        VALUES($secondParenthesis)", $data);
+    }
 
     // Méthode pour mettre à jour un enregistrement dans la table.
     public function update(int $id, array $data, ?array $relations=null)
@@ -42,7 +58,7 @@ abstract class Model
 
         // Parcours des données à mettre à jour
         foreach ($data as $key => $value) {
-            $comma = $i === count($data) ? " " : ", "; // Séparateur pour les parties de la requête SQL
+            $comma = $i === count($data) ? "" : ", "; // Séparateur pour les parties de la requête SQL
             $sqlRequestPart .= "{$key} = :{$key}{$comma}"; // Construction de la partie de la requête SQL
             $i++; // Incrémentation du compteur
         }
@@ -58,7 +74,6 @@ abstract class Model
     {
         return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id], true);
     }
-
 
 
     public function query(string $sql, array $param = null, bool $single = null)
